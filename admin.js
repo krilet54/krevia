@@ -977,6 +977,99 @@ function getStarterResourceBlueprints() {
                 ]),
                 createParagraph('That is the opportunity for Indian real estate teams right now. The market is crowded, but the digital buyer experience is still weak in too many launches. The teams that tighten the system create stronger demand quality, not just bigger lead volumes.')
             ]
+        },
+        {
+            title: '5 Ways Property Dealers Are Losing Leads Online (And How to Fix It)',
+            slug: '5-ways-property-dealers-losing-leads-online',
+            excerpt: 'Most property dealers lose 70% of potential buyers before they even make contact. Here are the 5 biggest digital mistakes costing you leads every day.',
+            metaDescription: 'Discover the 5 common digital marketing mistakes property dealers make that cost them leads. Learn actionable fixes to capture more buyers online.',
+            contentType: 'article',
+            resourceLabel: 'Lead Generation',
+            featuredSlot: 3,
+            coverImageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
+            blocks: [
+                createParagraph('Every day, potential property buyers are searching online for their next home or investment. They type queries like "2 BHK flat in Noida" or "best builder in Gurugram" into Google. But here is the harsh truth: if you are not showing up in those searches, your competitors are getting those leads instead.'),
+                createParagraph('After working with dozens of property dealers and channel partners across NCR, we have identified the 5 most common mistakes that cost real estate professionals leads every single day.'),
+                createHeading(2, '1. No Website or an Outdated One'),
+                createParagraph('In 2026, not having a professional website is like not having a business card in the 1990s. Buyers research online before they call. If they cannot find you, they will find someone else.'),
+                createParagraph('Even worse is having a website that looks like it was built in 2010. Slow loading times, no mobile optimization, and broken contact forms send buyers running to your competition.'),
+                createParagraph('The fix: Get a modern, mobile-first website with fast loading times, clear property listings, and easy contact options. Your website should load in under 3 seconds and look professional on phones.'),
+                createHeading(2, '2. Ignoring Google My Business'),
+                createParagraph('When someone searches "property dealer near me" or "real estate agent in Sector 62," Google shows local business listings first. If you have not claimed and optimized your Google My Business profile, you are invisible to these high-intent buyers.'),
+                createParagraph('The fix: Claim your Google My Business listing today. Add photos of your office, your team, and properties you have sold. Respond to reviews. Post updates weekly. This free tool can generate more leads than paid ads if used correctly.'),
+                createHeading(2, '3. Running Ads Without a Landing Page'),
+                createParagraph('We see this constantly: dealers spend lakhs on Facebook and Google ads, but send all that traffic to their homepage or worse, directly to WhatsApp. The result? Wasted ad spend and confused buyers who never convert.'),
+                createParagraph('The fix: Create dedicated landing pages for each project or campaign. A landing page focused on "3 BHK flats in Noida Extension" will convert 3-5x better than a generic homepage. Include project details, pricing, amenities, and a simple lead form.'),
+                createHeading(2, '4. No Follow-Up System'),
+                createParagraph('Getting a lead is only half the battle. Studies show that 78% of buyers go with the agent who responds first. Yet most dealers take hours or even days to follow up on inquiries.'),
+                createParagraph('The fix: Set up automated responses for new inquiries. Use a CRM to track leads and set follow-up reminders. Aim to respond to every inquiry within 5 minutes during business hours. Speed wins deals.'),
+                createHeading(2, '5. Inconsistent Social Media Presence'),
+                createParagraph('Posting one property listing every two weeks is not a social media strategy. Buyers check your Instagram and Facebook to see if you are active, trustworthy, and knowledgeable. An abandoned social profile signals an unreliable business.'),
+                createParagraph('The fix: Post consistently, at least 3-4 times per week. Mix property listings with market insights, client testimonials, and behind-the-scenes content. Show buyers that you are active and engaged in the market.'),
+                createHeading(2, 'The Bottom Line'),
+                createParagraph('These five mistakes are costing property dealers thousands of potential leads every month. The good news? They are all fixable. Start with one improvement this week. Claim your Google My Business. Speed up your follow-up time. Post more consistently.'),
+                createParagraph('Digital presence is not optional anymore. The dealers who invest in it now will dominate their markets for years to come. The question is: will you be one of them?')
+            ]
+        },
+        {
+            title: 'Why Buyers Can\'t Find Your Properties Online (The Visibility Problem)',
+            slug: 'why-buyers-cant-find-your-properties-online',
+            excerpt: '92% of home buyers start their search online. If your properties are not showing up, you are invisible to the modern buyer. Here is how to fix your digital visibility.',
+            metaDescription: 'Learn why your properties are not appearing in online searches and the proven strategies to increase your digital visibility as a property dealer in India.',
+            contentType: 'article',
+            resourceLabel: 'Digital Presence',
+            featuredSlot: 4,
+            coverImageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80',
+            blocks: [
+                createParagraph('Picture this: A young IT professional in Bangalore is ready to buy their first home. They open Google and search "ready to move flats near Electronic City." Hundreds of results appear. Builders, aggregators, portals like MagicBricks and 99acres dominate the first page.'),
+                createParagraph('Where are you in this search? If you are like most property dealers we meet, the answer is: nowhere.'),
+                createHeading(2, 'The Visibility Crisis in Indian Real Estate'),
+                createParagraph('The real estate industry has fundamentally changed. Ten years ago, property dealing was about who you knew, newspaper ads, and hoardings. Today, it is about who can be found.'),
+                createBulletList([
+                    '92% of home buyers start their property search online.',
+                    'The average buyer visits only 3-4 properties in person before deciding.',
+                    '75% of buyers never scroll past the first page of Google results.'
+                ]),
+                createParagraph('If you are not visible online, you simply do not exist for the modern buyer.'),
+                createHeading(2, 'Why Traditional Marketing No Longer Works'),
+                createParagraph('Newspaper ads, pamphlets, and hoardings served their purpose for decades. But buyer behavior has changed dramatically.'),
+                createParagraph('Before: Buyer sees hoarding, calls the number, and visits the site.'),
+                createParagraph('Now: Buyer searches online, reads reviews, checks social media, compares options, shortlists 3-4, and only then calls.'),
+                createParagraph('If you are only investing in offline marketing, you are entering the race at the finish line while your competitors have been running from the start.'),
+                createHeading(2, 'The Three Pillars of Digital Visibility'),
+                createHeading(3, '1. Search Presence'),
+                createParagraph('When buyers search for properties in your area, do you appear? This includes Google search results, Google My Business listings, Google Maps, and property portals like 99acres, MagicBricks, and Housing.com.'),
+                createParagraph('Action item: Search for "property dealer in your area" right now. If you are not on the first page, you have work to do.'),
+                createHeading(3, '2. Social Proof'),
+                createParagraph('Modern buyers trust online reviews and social media more than advertisements. They want to see Google reviews from past clients, active social media profiles, testimonials, success stories, and real photos.'),
+                createParagraph('Action item: Ask your last 5 satisfied clients to leave a Google review. Real reviews from real people build trust instantly.'),
+                createHeading(3, '3. Content Authority'),
+                createParagraph('Buyers trust experts. The dealers who share knowledge freely attract more clients than those who only post "available for sale" listings.'),
+                createBulletList([
+                    'Market insights and trends.',
+                    'Area guides and comparisons.',
+                    'Buying tips and checklists.',
+                    'Project reviews and analysis.'
+                ]),
+                createParagraph('Action item: Create one helpful piece of content this week. It could be a video about the top 5 things to check before buying a flat or a post about price trends in your area.'),
+                createHeading(2, 'The Compound Effect of Digital Presence'),
+                createParagraph('Here is what most dealers miss: digital visibility compounds over time.'),
+                createBulletList([
+                    'Month 1: You create a website and claim Google My Business.',
+                    'Month 3: You start appearing in local searches.',
+                    'Month 6: Past clients leave reviews, boosting your ranking.',
+                    'Month 12: You become the go-to dealer in your area for online searches.'
+                ]),
+                createParagraph('The dealers who started building their digital presence 2-3 years ago are now reaping the rewards. They get inbound leads daily while others are still cold calling.'),
+                createHeading(2, 'Start Today, Not Tomorrow'),
+                createParagraph('Every day you wait is a day your competitors get stronger online. The good news? It is never too late to start.'),
+                createBulletList([
+                    'Claim your Google My Business. It takes 15 minutes and it is free.',
+                    'Create or update your website. Even a simple one-page site is better than nothing.',
+                    'Post on social media consistently. Start with 3 posts per week.'
+                ]),
+                createParagraph('The property dealers who thrive in the next decade will be those who master digital visibility today. The question is not whether you can afford to invest in digital presence. The question is whether you can afford not to.')
+            ]
         }
     ];
 }
