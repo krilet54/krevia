@@ -395,11 +395,22 @@ function initCaseStudyScroll() {
             cs.classList.add('active');
             cs.style.position = 'relative';
             cs.style.height = 'auto';
-            cs.style.minHeight = '100vh';
-            cs.style.marginBottom = '20px';
-            animateMetrics(cs);
+            cs.style.minHeight = 'auto';
+            cs.style.marginBottom = '40px';
         });
         caseStudiesWrapper.style.height = 'auto';
+
+        // Use IntersectionObserver for mobile metrics animation
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateMetrics(entry.target);
+                    metricsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        caseStudies.forEach(cs => metricsObserver.observe(cs));
         return;
     }
 
