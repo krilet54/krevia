@@ -139,13 +139,13 @@
 
                 <div class="contact-form reveal-card">
                     <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 32px;">Send us a message</h3>
-                    <form action="https://formsubmit.co/kirpesh54@gmail.com" method="POST">
-                        <!-- FormSubmit Configuration -->
-                        <input type="hidden" name="_next" value="https://krilet54.github.io/krevia/thankyou.html">
-                        <input type="hidden" name="_subject" value="New Contact Form Submission - Krevia">
-                        <input type="hidden" name="_captcha" value="true">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="text" name="_honey" style="display:none">
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Configuration -->
+                        <input type="hidden" name="access_key" value="6b11058d-561f-443e-81af-3b5d5c5081a2">
+                        <input type="hidden" name="redirect" value="https://krilet54.github.io/krevia/thankyou.html">
+                        <input type="hidden" name="subject" value="New Contact Form Submission - Krevia">
+                        <input type="hidden" name="from_name" value="Krevia Website">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div class="form-group">
                             <label for="name">Your Name *</label>
