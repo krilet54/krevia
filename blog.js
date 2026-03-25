@@ -56,9 +56,19 @@ const state = {
     slideTimer: null
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+let blogInitialized = false;
+
+function bootstrapBlog() {
+    if (blogInitialized) return;
+    blogInitialized = true;
     initBlog();
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapBlog);
+} else {
+    bootstrapBlog();
+}
 
 async function initBlog() {
     const urlParams = new URLSearchParams(window.location.search);
