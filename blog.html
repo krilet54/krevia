@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Krevia resources for real estate growth teams: featured essays, launch playbooks, customer stories, and market-facing digital strategy.">
+    <title>Resources — Krevia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="page-transition">
+        <div class="transition-grid">
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+            <div class="transition-block"></div>
+        </div>
+        <div class="transition-logo">KREVIA</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">KREVIA</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="blog.html" class="nav-link active">Blog</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <a href="contact.html" class="nav-cta">
+            <span>Let's Talk</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-links">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="blog.html" class="mobile-link">Blog</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+        <div class="mobile-menu-footer">
+            <a href="tel:+919060868026">+91-9060868026</a>
+            <a href="mailto:contact@krevia.in">contact@krevia.in</a>
+        </div>
+    </div>
+
+    <!-- Resource Listing View -->
+    <div id="blog-listing">
+        <section class="resources-hero">
+            <div class="container">
+                <div class="resources-hero-shell">
+                    <p class="resources-eyebrow reveal-up">Krevia journal</p>
+                    <h1 class="resources-title reveal-up">RESOURCES</h1>
+                    <p class="resources-subtext reveal-up">
+                        Notes, systems, and signals for real estate teams building a sharper digital edge.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section resources-featured-section">
+            <div class="container">
+                <div class="resources-section-head reveal-up">
+                    <div>
+                        <span class="resources-kicker">Featured</span>
+                        <h2 class="resources-section-title">A rotating edit of what matters now.</h2>
+                    </div>
+                    <p class="resources-section-note">Up to five editor-picked resources, surfaced in sequence.</p>
+                </div>
+                <div class="featured-carousel" id="featured-carousel">
+                    <div class="featured-stage">
+                        <div class="featured-track" id="featured-track">
+                            <!-- Featured posts loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="featured-controls" id="featured-controls">
+                        <button class="featured-control-btn" id="featured-prev" type="button" aria-label="Previous featured resource">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <div class="featured-dots" id="featured-dots"></div>
+                        <button class="featured-control-btn" id="featured-next" type="button" aria-label="Next featured resource">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section resources-browser-section">
+            <div class="container">
+                <div class="resources-browser-head reveal-up">
+                    <div>
+                        <span class="resources-kicker">Browse</span>
+                        <h2 class="resources-section-title">A library built to be explored, not scrolled past.</h2>
+                    </div>
+                    <p class="resources-results" id="results-summary"></p>
+                </div>
+
+                <div class="resources-filters reveal-up">
+                    <label class="resources-search" for="resource-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="search" id="resource-search" placeholder="Search by title, theme, or phrase">
+                    </label>
+
+                    <div class="resources-filter-row">
+                        <div class="resources-type-pills" id="type-pills">
+                            <button class="resources-pill active" type="button" data-type="all">All</button>
+                            <button class="resources-pill" type="button" data-type="article">Articles</button>
+                            <button class="resources-pill" type="button" data-type="customer-story">Customer Stories</button>
+                            <button class="resources-pill" type="button" data-type="press">Press</button>
+                        </div>
+
+                        <label class="resources-sort" for="resource-sort">
+                            <span>Sort</span>
+                            <select id="resource-sort">
+                                <option value="featured">Featured First</option>
+                                <option value="newest">Newest</option>
+                                <option value="oldest">Oldest</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="resources-list" id="resources-list">
+                    <!-- Posts loaded dynamically -->
+                </div>
+
+                <!-- Loading State -->
+                <div class="blog-loading" id="blog-loading" style="display: none;">
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--grey-300); animation: spin 1s linear infinite;">
+                            <circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"/>
+                        </svg>
+                        <p style="color: var(--grey-500); margin-top: 16px;">Loading posts...</p>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="blog-empty" id="blog-empty" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2z"/>
+                        <line x1="9" y1="9" x2="13" y2="9"/>
+                        <line x1="9" y1="13" x2="13" y2="13"/>
+                    </svg>
+                    <h3>No resources yet</h3>
+                    <p>Publish your first piece from the admin portal and it will appear here.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Single Post View (hidden by default) -->
+    <div id="blog-single" style="display: none;">
+        <section class="section" style="background: var(--white); padding-top: 120px;">
+            <div class="container">
+                <div class="blog-post">
+                    <a href="blog.html" class="blog-post-back">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Back to Resources
+                    </a>
+
+                    <article>
+                        <header class="blog-post-header">
+                            <div class="blog-post-type" id="post-type-pill" style="display: none;"></div>
+                            <div class="blog-post-meta">
+                                <span id="post-label"></span>
+                                <span id="post-date"></span>
+                                <span>•</span>
+                                <span id="post-reading-time"></span>
+                            </div>
+                            <h1 class="blog-post-title" id="post-title"></h1>
+                            <p class="blog-post-excerpt" id="post-excerpt"></p>
+                        </header>
+
+                        <img class="blog-post-cover" id="post-cover" src="" alt="" style="display: none;">
+
+                        <div class="prose" id="post-content">
+                            <!-- Content loaded dynamically -->
+                        </div>
+                    </article>
+
+                    <!-- Share Section -->
+                    <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--grey-200);">
+                        <p style="font-size: 0.875rem; color: var(--grey-500); margin-bottom: 16px;">Share this article</p>
+                        <div style="display: flex; gap: 12px;">
+                            <a href="#" id="share-twitter" class="admin-btn-icon" target="_blank" rel="noopener" aria-label="Share on Twitter">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <a href="#" id="share-linkedin" class="admin-btn-icon" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 18px; height: 18px;">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect x="2" y="9" width="4" height="12"/>
+                                    <circle cx="4" cy="4" r="2"/>
+                                </svg>
+                            </a>
+                            <a href="#" id="share-whatsapp" class="admin-btn-icon" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container cta-content">
+            <h2 class="section-title reveal-up"><span>Ready to grow your leads?</span></h2>
+            <p class="cta-desc reveal-up">
+                Let's build your digital presence and start generating qualified leads for your property business.
+            </p>
+            <div class="cta-buttons reveal-up">
+                <a href="contact.html" class="btn btn-primary btn-large">
+                    <span>Get Started</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+                <a href="https://wa.me/919060868026" class="btn btn-whatsapp btn-large" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-marquee">
+            <div class="marquee-content">
+                <span>KREVIA</span>
+                <span class="marquee-separator">//</span>
+                <span>DIGITAL OPERATIONS FOR REAL ESTATE</span>
+                <span class="marquee-separator">//</span>
+                <span>NOIDA</span>
+                <span class="marquee-separator">//</span>
+                <span>GURUGRAM</span>
+                <span class="marquee-separator">//</span>
+                <span>DELHI NCR</span>
+                <span class="marquee-separator">//</span>
+                <span>KREVIA</span>
+                <span class="marquee-separator">//</span>
+                <span>DIGITAL OPERATIONS FOR REAL ESTATE</span>
+                <span class="marquee-separator">//</span>
+                <span>NOIDA</span>
+                <span class="marquee-separator">//</span>
+                <span>GURUGRAM</span>
+                <span class="marquee-separator">//</span>
+                <span>DELHI NCR</span>
+                <span class="marquee-separator">//</span>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="footer-brand">
+                <span class="footer-logo">KREVIA</span>
+                <p class="footer-tagline">Digital Operations for Real Estate</p>
+                <p class="footer-desc">The dedicated digital team that property brokers and channel partners never had — one subscription, complete digital presence.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <h5>Navigate</h5>
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="about.html">About</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="admin.html">Admin Portal</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Packages</h5>
+                    <a href="services.html#packages">Foundation — ₹12K</a>
+                    <a href="services.html#packages">Launch — ₹25K</a>
+                    <a href="services.html#packages">Partner — ₹45K</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Contact</h5>
+                    <div class="footer-contacts">
+                        <div class="footer-contact-card">
+                            <p class="contact-role">Phone</p>
+                            <a href="tel:+919060868026" class="contact-link">+91-9060868026</a>
+                        </div>
+                        <div class="footer-contact-card">
+                            <p class="contact-role">Email</p>
+                            <a href="mailto:contact@krevia.in" class="contact-link">contact@krevia.in</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Location</h5>
+                    <p>Delhi, India</p>
+                    <p>Serving NCR Region</p>
+                    <p style="margin-top: 16px; color: var(--grey-600);">Est. 2026</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Krevia. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="#" class="footer-social" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="footer-social" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="#" class="footer-social" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/919060868026" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Main Scripts -->
+    <script src="script.js"></script>
+    <script src="blog.js"></script>
+</body>
+</html>
