@@ -108,6 +108,26 @@ function setupListingControls() {
 
     listingDom.featuredCarousel?.addEventListener('mouseenter', stopSlideTimer);
     listingDom.featuredCarousel?.addEventListener('mouseleave', startSlideTimer);
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    listingDom.featuredCarousel?.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    listingDom.featuredCarousel?.addEventListener('touchend', (event) => {
+        touchEndX = event.changedTouches[0].clientX;
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) < 40) return;
+
+        if (swipeDistance < 0) {
+            goToSlide(state.activeSlide + 1);
+        } else {
+            goToSlide(state.activeSlide - 1);
+        }
+    }, { passive: true });
 }
 
 async function loadBlogListing() {
@@ -453,8 +473,8 @@ function renderFeaturedFallback() {
                     </div>
                     <p class="featured-label">Editor’s pick</p>
                     <h3 class="featured-title">Your featured resources will appear here.</h3>
-                    <p class="featured-excerpt">Use the admin portal to publish articles, then mark up to five of them for the featured carousel.</p>
-                    <a class="featured-link" href="admin.html">Open admin portal</a>
+                    <p class="featured-excerpt">Use the admin to publish articles, then mark up to five of them for the featured carousel.</p>
+                    <a class="featured-link" href="admin.html">Open admin</a>
                 </div>
                 <div class="featured-media featured-media-placeholder">
                     <div class="featured-placeholder-grid"></div>
@@ -486,7 +506,7 @@ function startSlideTimer() {
 
     state.slideTimer = window.setInterval(() => {
         goToSlide(state.activeSlide + 1);
-    }, 6500);
+    }, 11000);
 }
 
 function stopSlideTimer() {

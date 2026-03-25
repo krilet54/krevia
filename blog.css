@@ -664,6 +664,36 @@
         width: 26px;
     }
 
+    .featured-slide-shell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .featured-media {
+        order: -1;
+        min-height: 220px;
+    }
+
+    .featured-copy {
+        padding: 22px 20px 18px;
+    }
+
+    .featured-title {
+        max-width: none;
+        font-size: clamp(1.85rem, 9vw, 2.5rem);
+    }
+
+    .featured-excerpt {
+        margin-top: 14px;
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .featured-link {
+        margin-top: 20px;
+        padding: 11px 16px;
+    }
+
     .featured-control-btn {
         width: 40px;
         height: 40px;
@@ -671,6 +701,10 @@
 
     .featured-dots {
         gap: 8px;
+    }
+
+    .featured-controls {
+        padding: 12px 16px 16px;
     }
 
     .resource-row-image {
@@ -1106,7 +1140,8 @@
     background: var(--white);
     border: 1px solid var(--grey-200);
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .admin-table {
@@ -1177,6 +1212,8 @@
 .admin-post-actions {
     display: flex;
     gap: 8px;
+    min-width: 148px;
+    justify-content: flex-end;
 }
 
 .admin-btn-icon {

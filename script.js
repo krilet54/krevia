@@ -397,6 +397,7 @@ function initCaseStudyScroll() {
             cs.style.height = 'auto';
             cs.style.minHeight = '100vh';
             cs.style.marginBottom = '20px';
+            animateMetrics(cs);
         });
         caseStudiesWrapper.style.height = 'auto';
         return;
