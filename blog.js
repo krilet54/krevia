@@ -100,10 +100,12 @@ function setupListingControls() {
 }
 
 async function loadBlogListing() {
+    const resourceMount = ensureResourcesMount();
+
     listingDom.blogListing.style.display = 'block';
     listingDom.blogSingle.style.display = 'none';
     listingDom.blogLoading.style.display = 'block';
-    listingDom.resourcesList.innerHTML = '';
+    resourceMount.innerHTML = '';
     listingDom.blogEmpty.style.display = 'none';
 
     try {
@@ -132,8 +134,19 @@ async function loadBlogListing() {
         state.posts = posts.map(normalizePost);
         state.featuredPosts = resolveFeaturedPosts(state.posts);
 
-        renderFeaturedCarousel(state.featuredPosts);
-        applyFiltersAndRender();
+        try {
+            renderFeaturedCarousel(state.featuredPosts);
+        } catch (featuredError) {
+            console.error('Featured render error:', featuredError);
+        }
+
+        try {
+            applyFiltersAndRender();
+        } catch (listingError) {
+            console.error('Listing render error:', listingError);
+            renderLegacyGrid(state.posts);
+            updateResultsSummary(state.posts.length, state.posts.length);
+        }
 
     } catch (error) {
         console.error('Error loading resources:', error);
@@ -141,6 +154,27 @@ async function loadBlogListing() {
         listingDom.blogEmpty.style.display = 'block';
         renderFeaturedFallback();
     }
+}
+
+function ensureResourcesMount() {
+    if (listingDom.resourcesList) {
+        return listingDom.resourcesList;
+    }
+
+    const listingContainer = document.querySelector('#blog-listing .container:last-of-type') ||
+        document.querySelector('#blog-listing .container');
+
+    if (!listingContainer) {
+        throw new Error('No resource listing container found');
+    }
+
+    const fallbackMount = document.createElement('div');
+    fallbackMount.id = 'resources-list';
+    fallbackMount.className = 'resources-list';
+    listingContainer.appendChild(fallbackMount);
+    listingDom.resourcesList = fallbackMount;
+
+    return fallbackMount;
 }
 
 function normalizePost(post) {
