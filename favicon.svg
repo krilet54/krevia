@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Krevia">
+  <defs>
+    <linearGradient id="krevia-bg" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#18181b"/>
+      <stop offset="1" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="krevia-accent" x1="18" y1="16" x2="46" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d98383"/>
+      <stop offset="1" stop-color="#b54a4a"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="18" fill="url(#krevia-bg)"/>
+  <rect x="9" y="9" width="46" height="46" rx="13" fill="none" stroke="#27272a" stroke-width="1.5"/>
+  <path d="M20 18v28" fill="none" stroke="#fafafa" stroke-linecap="round" stroke-width="5"/>
+  <path d="M23 32 42 18" fill="none" stroke="url(#krevia-accent)" stroke-linecap="round" stroke-width="5"/>
+  <path d="M23 32 42 46" fill="none" stroke="#fafafa" stroke-linecap="round" stroke-width="5"/>
+  <circle cx="46" cy="18" r="4" fill="#b54a4a"/>
+</svg>
