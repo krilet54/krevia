@@ -11,6 +11,8 @@ import Placeholder from 'https://esm.sh/@tiptap/extension-placeholder@2.1.13';
 const SUPABASE_URL = 'https://jmcquwcoxefbvwwglikn.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptY3F1d2NveGVmYnZ3d2dsaWtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjkyMDksImV4cCI6MjA5MDAwNTIwOX0.rQUOV2V0Gx31P9DmDRm0XflyY78Voaa_z9qo6leTvPw';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const STORAGE_BUCKET = 'blog-images';
+const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
 
 const RESOURCE_TYPES = {
     article: {
@@ -352,31 +354,27 @@ window.handleImageUpload = async function(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > MAX_UPLOAD_SIZE_BYTES) {
         showToast('Image must be less than 5MB', 'error');
+        event.target.value = '';
         return;
     }
 
     showToast('Uploading image...', 'success');
 
     try {
-        const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
-        const { error } = await supabase.storage
-            .from('blog-images')
-            .upload(fileName, file);
-
-        if (error) throw error;
-
-        const { data: urlData } = supabase.storage
-            .from('blog-images')
-            .getPublicUrl(fileName);
-
-        editor.chain().focus().setImage({ src: urlData.publicUrl }).run();
-        showToast('Image uploaded!', 'success');
+        const { url, mode } = await uploadImageAsset(file, 'editor');
+        editor.chain().focus().setImage({ src: url }).run();
+        showToast(
+            mode === 'storage'
+                ? 'Image uploaded!'
+                : 'Image added successfully (embedded because storage is unavailable)',
+            'success'
+        );
 
     } catch (error) {
         console.error('Upload error:', error);
-        showToast('Failed to upload image', 'error');
+        showToast(error.message || 'Failed to upload image', 'error');
     }
 
     event.target.value = '';
@@ -386,34 +384,146 @@ window.handleCoverUpload = async function(event) {
     const file = event.target.files[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > MAX_UPLOAD_SIZE_BYTES) {
         showToast('Image must be less than 5MB', 'error');
+        event.target.value = '';
         return;
     }
 
     showToast('Uploading cover...', 'success');
 
     try {
-        const fileName = `covers/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
+        const { url, mode } = await uploadImageAsset(file, 'covers');
+        coverImageUrl = url;
+        updateCoverPreview();
+        showToast(
+            mode === 'storage'
+                ? 'Cover uploaded!'
+                : 'Cover added successfully (embedded because storage is unavailable)',
+            'success'
+        );
+
+    } catch (error) {
+        console.error('Upload error:', error);
+        showToast(error.message || 'Failed to upload cover', 'error');
+    }
+
+    event.target.value = '';
+};
+
+async function uploadImageAsset(file, folder) {
+    if (!file.type.startsWith('image/')) {
+        throw new Error('Please choose a valid image file');
+    }
+
+    if (!currentUser) {
+        throw new Error('Please sign in again before uploading images');
+    }
+
+    const filePath = buildStoragePath(file, folder);
+
+    try {
         const { error } = await supabase.storage
-            .from('blog-images')
-            .upload(fileName, file);
+            .from(STORAGE_BUCKET)
+            .upload(filePath, file, {
+                cacheControl: '3600',
+                upsert: false,
+                contentType: file.type || 'application/octet-stream'
+            });
 
         if (error) throw error;
 
         const { data: urlData } = supabase.storage
-            .from('blog-images')
-            .getPublicUrl(fileName);
+            .from(STORAGE_BUCKET)
+            .getPublicUrl(filePath);
 
-        coverImageUrl = urlData.publicUrl;
-        updateCoverPreview();
-        showToast('Cover uploaded!', 'success');
+        if (!urlData?.publicUrl) {
+            throw new Error('Could not generate a public URL for the uploaded image');
+        }
 
-    } catch (error) {
-        console.error('Upload error:', error);
-        showToast('Failed to upload cover', 'error');
+        return { url: urlData.publicUrl, mode: 'storage' };
+    } catch (storageError) {
+        console.warn('Falling back to embedded image upload:', storageError);
+
+        const embeddedUrl = await createEmbeddedImageUrl(file);
+        return { url: embeddedUrl, mode: 'embedded' };
     }
-};
+}
+
+function buildStoragePath(file, folder) {
+    const safeName = file.name
+        .toLowerCase()
+        .replace(/[^a-z0-9.-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+    const userSegment = currentUser?.id ? currentUser.id : 'guest';
+    return `${userSegment}/${folder}/${Date.now()}-${safeName || 'image'}`;
+}
+
+async function createEmbeddedImageUrl(file) {
+    if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
+        return fileToDataUrl(file);
+    }
+
+    try {
+        return await rasterImageToDataUrl(file, 1600, 0.86);
+    } catch (error) {
+        console.warn('Raster compression failed, using original data URL:', error);
+        return fileToDataUrl(file);
+    }
+}
+
+function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Could not read the selected image'));
+        reader.readAsDataURL(file);
+    });
+}
+
+function rasterImageToDataUrl(file, maxDimension, quality) {
+    return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+        const image = new window.Image();
+
+        image.onload = () => {
+            const largestSide = Math.max(image.width, image.height) || 1;
+            const scale = Math.min(1, maxDimension / largestSide);
+            const width = Math.max(1, Math.round(image.width * scale));
+            const height = Math.max(1, Math.round(image.height * scale));
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+
+            const context = canvas.getContext('2d');
+            if (!context) {
+                URL.revokeObjectURL(objectUrl);
+                reject(new Error('Could not prepare the image for upload'));
+                return;
+            }
+
+            context.drawImage(image, 0, 0, width, height);
+
+            try {
+                const dataUrl = canvas.toDataURL('image/webp', quality);
+                URL.revokeObjectURL(objectUrl);
+                resolve(dataUrl);
+            } catch (canvasError) {
+                URL.revokeObjectURL(objectUrl);
+                reject(canvasError);
+            }
+        };
+
+        image.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject(new Error('Could not process the selected image'));
+        };
+
+        image.src = objectUrl;
+    });
+}
 
 function updateCoverPreview() {
     const preview = document.getElementById('cover-preview');
