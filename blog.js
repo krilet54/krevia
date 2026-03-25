@@ -3,11 +3,12 @@
    ============================================ */
 
 // Supabase Configuration
-const SUPABASE_URL = 'https://jmcquwcoxefbvwwglikn.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptY3F1d2NveGVmYnZ3d2dsaWtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjkyMDksImV4cCI6MjA5MDAwNTIwOX0.rQUOV2V0Gx31P9DmDRm0XflyY78Voaa_z9qo6leTvPw';
+const BLOG_SUPABASE_URL = 'https://jmcquwcoxefbvwwglikn.supabase.co';
+const BLOG_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptY3F1d2NveGVmYnZ3d2dsaWtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjkyMDksImV4cCI6MjA5MDAwNTIwOX0.rQUOV2V0Gx31P9DmDRm0XflyY78Voaa_z9qo6leTvPw';
 
-// Initialize Supabase client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Initialize Supabase client (use existing if available, otherwise create new)
+const blogSupabase = window.blogSupabaseClient || window.supabase.createClient(BLOG_SUPABASE_URL, BLOG_SUPABASE_ANON_KEY);
+window.blogSupabaseClient = blogSupabase;
 
 const RESOURCE_TYPES = {
     article: {
@@ -119,7 +120,7 @@ async function loadBlogListing() {
     listingDom.blogEmpty.style.display = 'none';
 
     try {
-        const { data: posts, error } = await supabase
+        const { data: posts, error } = await blogSupabase
             .from('posts')
             .select('id, title, slug, excerpt, cover_image_url, reading_time_minutes, published_at, content')
             .eq('status', 'published')
@@ -516,7 +517,7 @@ async function loadSinglePost(slug) {
     listingDom.blogSingle.style.display = 'block';
 
     try {
-        const { data: post, error } = await supabase
+        const { data: post, error } = await blogSupabase
             .from('posts')
             .select('*')
             .eq('slug', slug)
