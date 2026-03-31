@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /thankyou.html
+
+Sitemap: https://krevia.in/sitemap.xml

@@ -549,9 +549,11 @@ async function loadSinglePost(slug) {
             return;
         }
 
-        renderSinglePost(normalizePost(post));
-        updateMetaTags(post);
-        setupShareLinks(post);
+        const normalizedPost = normalizePost(post);
+
+        renderSinglePost(normalizedPost);
+        updateMetaTags(normalizedPost);
+        setupShareLinks(normalizedPost);
 
     } catch (error) {
         console.error('Error loading post:', error);
@@ -595,7 +597,7 @@ function renderSinglePost(post) {
     }
 
     contentContainer.innerHTML = renderTipTapContent(post.content);
-    document.title = `${post.title} — Krevia Resources`;
+    document.title = `${post.title} | Krevia Resources`;
 }
 
 function renderTipTapContent(json) {
@@ -708,30 +710,82 @@ function setupShareLinks(post) {
 }
 
 function updateMetaTags(post) {
+    const canonicalUrl = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(post.slug)}`;
+    const fallbackDescription = 'Real estate launch strategy and growth insights from Krevia.';
+    const metaDescription = post.meta_description || post.excerpt || fallbackDescription;
+    const fallbackImage = `${window.location.origin}/onebymsn.png`;
+    const shareImage = post.cover_image_url || fallbackImage;
+
     const metaDesc = document.querySelector('meta[name="description"]');
 
-    if (metaDesc && post.meta_description) {
-        metaDesc.setAttribute('content', post.meta_description);
-    } else if (metaDesc && post.excerpt) {
-        metaDesc.setAttribute('content', post.excerpt);
+    if (metaDesc) {
+        metaDesc.setAttribute('content', metaDescription);
     }
 
-    addMetaTag('og:title', post.title);
-    addMetaTag('og:description', post.excerpt || post.meta_description || '');
+    setCanonicalUrl(canonicalUrl);
+
+    addMetaTag('og:title', `${post.title} | Krevia Resources`);
+    addMetaTag('og:description', metaDescription);
     addMetaTag('og:type', 'article');
-    addMetaTag('og:url', window.location.href);
-
-    if (post.cover_image_url) {
-        addMetaTag('og:image', post.cover_image_url);
-    }
+    addMetaTag('og:site_name', 'Krevia');
+    addMetaTag('og:url', canonicalUrl);
+    addMetaTag('og:image', shareImage);
+    addMetaTag('article:published_time', post.published_at || '');
 
     addMetaTag('twitter:card', 'summary_large_image');
-    addMetaTag('twitter:title', post.title);
-    addMetaTag('twitter:description', post.excerpt || post.meta_description || '');
+    addMetaTag('twitter:title', `${post.title} | Krevia Resources`);
+    addMetaTag('twitter:description', metaDescription);
+    addMetaTag('twitter:image', shareImage);
 
-    if (post.cover_image_url) {
-        addMetaTag('twitter:image', post.cover_image_url);
+    upsertJsonLd('page-schema', {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        mainEntityOfPage: canonicalUrl,
+        headline: post.title,
+        description: metaDescription,
+        datePublished: post.published_at || undefined,
+        dateModified: post.updated_at || post.published_at || undefined,
+        articleSection: post.resourceMeta?.typeLabel || 'Article',
+        image: shareImage,
+        author: {
+            '@type': 'Organization',
+            name: 'Krevia',
+            url: `${window.location.origin}/`
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Krevia',
+            logo: {
+                '@type': 'ImageObject',
+                url: `${window.location.origin}/favicon.svg`
+            }
+        }
+    });
+}
+
+function setCanonicalUrl(url) {
+    let canonical = document.querySelector('link[rel="canonical"]');
+
+    if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
     }
+
+    canonical.setAttribute('href', url);
+}
+
+function upsertJsonLd(id, payload) {
+    let script = document.getElementById(id);
+
+    if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = id;
+        document.head.appendChild(script);
+    }
+
+    script.textContent = JSON.stringify(payload);
 }
 
 function addMetaTag(property, content) {
